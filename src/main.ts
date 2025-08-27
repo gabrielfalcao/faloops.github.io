@@ -2,7 +2,15 @@ const context = new AudioContext(); //allows access to webaudioapi
 const oscillator = context.createOscillator(); //creates oscillator
 const audio = {context, oscillator};
 
-const faloopsConfig = {
+
+interface Config {
+  minPitch: number;
+  maxPitch: number;
+  minInterval: number;
+  maxInterval: number;
+  active: boolean;
+}
+const faloopsConfig: Config = {
    minPitch : 13000,  // hz
    maxPitch : 22000,  // hz
    minInterval : 60,  // ms
@@ -47,7 +55,9 @@ function addTimer(audio, toClear) {
 }
 function startOscillator() {
   faloopsConfig.active = true;
-  addTimer(audio);
+  addTimer(audio, setTimeout(() => {
+    console.log("oscillator started")
+  }, 109));
   oscillator.type = "sine"; //chooses the type of wave
   // console.log("freq", oscillator.frequency);
   oscillator.frequency.value = randomPitch();
@@ -67,11 +77,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   });
   ["min", "max"].forEach(kind => {
-    document.getElementById(`freq-${kind}`).addEventListener("change", (event) => {
-      const value = parseFloat(event.target.value);
+    // @ts-ignore: TS2740
+    const input: HTMLInputElement = document.getElementById(`freq-${kind}`);
+    input.addEventListener("change", () => {
+      const value = input.valueAsNumber;
       console.log(`freq-min changed to: ${value}`, typeof value);
-      faloopsConfig.minPitch = parseFloat(value);
+      faloopsConfig.minPitch = value;
     });
-    document.getElementById(`freq-${kind}`).value = faloopsConfig[`${kind}Pitch`];
+    input.value = faloopsConfig[`${kind}Pitch`];
   })
 });
