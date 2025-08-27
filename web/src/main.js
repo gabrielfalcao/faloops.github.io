@@ -2,10 +2,10 @@ const context = new AudioContext(); //allows access to webaudioapi
 const oscillator = context.createOscillator(); //creates oscillator
 const audio = { context, oscillator };
 const faloopsConfig = {
-    minPitch: 13000,
-    maxPitch: 22000,
-    minInterval: 60,
-    maxInterval: 420,
+    minPitch: 13000, // hz
+    maxPitch: 22000, // hz
+    minInterval: 60, // ms
+    maxInterval: 420, // ms
     active: false,
 };
 function randomPitch() {
