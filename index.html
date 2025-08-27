@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <style type="text/css">
+     html, body {
+       background: #555;
+       color: #FFF;
+       font-family: "Helvetica";
+     }
+     a, p, div, span {
+       color: #FFF;
+     }
+     #start {
+       width: 200px;
+       height: 100px;
+       display: block;
+       font-size: 30px;
+     }
+     #when-inactive {
+       display: block;
+     }
+     #when-active {
+       display: none;
+     }
+    </style>
+    <center>
+      <div  id="when-inactive" class="jsmanaged">
+        <button id="start">Start</button>
+      </div>
+      <div id="when-active" class="jsmanaged">
+        <h1 id="freq">starting</h1>
+        <pre id="status"></pre>
+
+        <label for="freq-min">Min. Frequency</label>
+        <input type="number" min="9000" max="22000" name="freq-min" id="freq-min" />
+        <label for="freq-max">Max. Frequency</label>
+        <input type="number" min="12000" max="22000" name="freq-max"  id="freq-max" />
+      </div>
+    </center>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
